@@ -1,0 +1,6 @@
+symbols_yfinance:
+  AAPL.NAS: AAPL
+  AMZN.NAS: AMZN
+  GOOGL.NAS: GOOGL
+  MSFT.NAS: MSFT
+  NVDA.NAS: NVDA
