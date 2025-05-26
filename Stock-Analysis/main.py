@@ -10,7 +10,7 @@ from modules.news_summarizer_sentiment_analyzer import NewsProcessor
 from modules.google_sheet_api import GoogleSheetsUploader
 
 # ========== Configuration ========== #
-BASE_DIR = "Stock-Analysis"
+BASE_DIR = os.getcwd()
 CONFIG_PATH = os.path.join(BASE_DIR, "config.yaml")
 CREDENTIAL_GOOGLE_SHEETS_PATH = os.path.join(BASE_DIR, "credential_google_sheets.json")
 CREDENTIAL_GEMINI_PATH = os.path.join(BASE_DIR, "credential_gemini.json")
