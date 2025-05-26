@@ -4,13 +4,13 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
 
-from data_fetcher import YahooFinanceDataFetcher
-from yfinance_news_fetcher import YahooFinanceNewsFetcher
-from news_summarizer_sentiment_analyzer import NewsProcessor
-from google_sheet_api import GoogleSheetsUploader
+from modules.data_fetcher import YahooFinanceDataFetcher
+from modules.yfinance_news_fetcher import YahooFinanceNewsFetcher
+from modules.news_summarizer_sentiment_analyzer import NewsProcessor
+from modules.google_sheet_api import GoogleSheetsUploader
 
 # ========== Configuration ========== #
-BASE_DIR = os.getcwd()
+BASE_DIR = "Stock-Analysis"
 CONFIG_PATH = os.path.join(BASE_DIR, "config.yaml")
 CREDENTIAL_GOOGLE_SHEETS_PATH = os.path.join(BASE_DIR, "credential_google_sheets.json")
 CREDENTIAL_GEMINI_PATH = os.path.join(BASE_DIR, "credential_gemini.json")
