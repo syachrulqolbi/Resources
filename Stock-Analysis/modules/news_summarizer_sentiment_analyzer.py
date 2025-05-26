@@ -58,21 +58,21 @@ class NewsProcessor:
         """
         if df.empty:
             print("No data to summarize.")
-            return pd.DataFrame(columns=["Symbol", "Summary", "Last Updated"])
+            return pd.DataFrame(columns=["Symbol", "Summary", "Last News", "Last Updated"])
 
         df["Datetime"] = pd.to_datetime(df["Datetime"], errors="coerce")
         df = df.dropna(subset=["Datetime"])
-        latest_dates = df.groupby("Symbol")["Datetime"].max().reset_index().rename(columns={"Datetime": "Last Updated"})
+        latest_dates = df.groupby("Symbol")["Datetime"].max().reset_index().rename(columns={"Datetime": "Last News"})
         results = []
 
         model = genai.GenerativeModel("gemini-2.0-flash")
         
         for symbol in df["Symbol"].unique():
-            latest_published = latest_dates.loc[latest_dates["Symbol"] == symbol, "Last Updated"].values[0]
+            latest_published = latest_dates.loc[latest_dates["Symbol"] == symbol, "Last News"].values[0]
             news_summaries = "\n".join(df[df["Symbol"] == symbol]["Summary"].dropna().tolist()).strip()
 
             if not news_summaries:
-                results.append({"Symbol": symbol, "Summary": "", "Last Updated": latest_published})
+                results.append({"Symbol": symbol, "Summary": "", "Last News": latest_published})
                 continue
             
             try:
@@ -82,7 +82,7 @@ class NewsProcessor:
                 print(f"❌ Error summarizing news for {symbol}: {e}")
                 summary_text = ""
 
-            results.append({"Symbol": symbol, "Summary": summary_text, "Last Updated": latest_published})
+            results.append({"Symbol": symbol, "Summary": summary_text, "Last News": latest_published, "Last Updated": pd.Timestamp.now().strftime("%-m/%-d/%Y %-I:%M:%S")})
 
         return pd.DataFrame(results)
 
