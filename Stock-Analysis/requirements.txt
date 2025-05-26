@@ -1,4 +1,6 @@
 google-generativeai
+gspread==6.1.4
+gspread_dataframe
 PyYAML
 scikit-learn
 transformers
