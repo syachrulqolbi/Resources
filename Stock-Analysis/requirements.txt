@@ -1,3 +1,4 @@
-scikit-learn
+google-generativeai
 PyYAML
+scikit-learn
 yfinance
