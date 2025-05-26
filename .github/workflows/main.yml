@@ -1,0 +1,32 @@
+name: Stock Analysis Data Automation
+
+on:
+  schedule:
+    #- cron: "0 0 * * *"  # Runs daily
+    - cron: "*/5 * * * *"  # Runs every 5 minutes
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  modelling:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create google sheets credentials.json
+        run: echo '${{ secrets.CREDENTIAL_GOOGLE_SHEETS }}' > credential_google_sheets.json
+
+      - name: Create gemini credentials.json
+        run: echo '${{ secrets.CREDENTIAL_GEMINI }}' > credential_gemini.json
+
+      - name: Run script
+        run: python main.py
