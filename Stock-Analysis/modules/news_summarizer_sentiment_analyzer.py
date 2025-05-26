@@ -1,6 +1,7 @@
 import google.generativeai as genai
 from transformers import BertTokenizer, BertForSequenceClassification, pipeline
 import pandas as pd
+import json
 
 class NewsProcessor:
     """
