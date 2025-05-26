@@ -2,6 +2,7 @@ import yfinance as yf
 from typing import Dict, List, Any
 import time
 import pandas as pd
+import yaml
 
 class YahooFinanceNewsFetcher:
     """
