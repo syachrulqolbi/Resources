@@ -111,20 +111,3 @@ class NewsProcessor:
                     df.at[index, "Confidence"] = ""
         
         return df
-
-try:
-    processor = NewsProcessor(
-        config_path="config.yaml",
-        gemini_credentials="credential_gemini.json"
-    )
-    
-    if not df_news.empty:
-        df_sentiment = processor.summarize_news(df_news)
-        df_sentiment = processor.analyze_sentiment(df_sentiment)
-        df_sentiment["Last Updated"] = pd.to_datetime(df_sentiment["Last Updated"], errors="coerce").dt.strftime("%Y-%m-%d %H:%M:%S")
-        
-        print("✅ Analysis successfull.")
-    else:
-        print("❌ No data found in source table. No processing performed.")
-except Exception as e:
-    print(f"❌ Unexpected error in main execution: {e}")
